@@ -5,7 +5,6 @@ import { dirname, sep } from "node:path"
 import { fileURLToPath } from "node:url"
 
 import mdx from "@astrojs/mdx"
-import partytown from "@astrojs/partytown"
 import react from "@astrojs/react"
 import sitemap from "@astrojs/sitemap"
 import tailwindcss from "@tailwindcss/vite"
@@ -31,5 +30,5 @@ export default defineConfig({
       fs: { allow: [searchForWorkspaceRoot(process.cwd()), packageStore] },
     },
   },
-  integrations: [mdx(), react(), partytown(), sitemap()],
+  integrations: [mdx(), react(), sitemap()],
 })
