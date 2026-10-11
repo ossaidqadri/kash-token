@@ -1,0 +1,29 @@
+---
+import { Image, Picture } from "astro:assets"
+
+import heroBg from "@/assets/kashtoken/hero-bg.png"
+import heroLogo from "@/assets/kashtoken/hero-logo.png"
+import { site } from "@/data/site"
+---
+
+<section class="relative overflow-hidden bg-brand-navy md:h-[533px]">
+  <Picture
+    src={heroBg}
+    alt=""
+    formats={["avif", "webp"]}
+    widths={[640, 1024]}
+    sizes="100vw"
+    loading="eager"
+    class="absolute inset-0 size-full object-cover"
+  />
+  <div class="relative mx-auto flex max-w-[1154px] flex-col items-center gap-8 px-2 pt-20 pb-12 md:grid md:grid-cols-[4fr_8fr] md:items-start md:gap-0 md:pt-28">
+    <Image src={heroLogo} alt="KASH" width={365} height={365} loading="eager" class="size-[min(365px,70vw)]" />
+    <div class="w-full space-y-4 text-[14.667px] text-white md:pt-2">
+      <p>Contract Address:</p>
+      <p class="break-all">{site.contract}</p>
+      <p class="break-all">
+        <a href={site.bscscan} class="underline" target="_blank" rel="noopener noreferrer">{site.bscscan}</a>
+      </p>
+    </div>
+  </div>
+</section>

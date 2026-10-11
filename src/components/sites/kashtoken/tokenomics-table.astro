@@ -1,0 +1,28 @@
+---
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { allocations, formatTokens } from "@/data/tokenomics"
+---
+
+<h2 class="text-2xl font-bold text-ink">KASH Tokenomics</h2>
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Category</TableHead>
+      <TableHead>Allocation</TableHead>
+      <TableHead>Percentage</TableHead>
+      <TableHead>Purpose</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    {
+      allocations.map((a) => (
+        <TableRow>
+          <TableCell>{a.category}</TableCell>
+          <TableCell>{formatTokens(a.tokens)}</TableCell>
+          <TableCell>{a.percent}%</TableCell>
+          <TableCell>{a.purpose}</TableCell>
+        </TableRow>
+      ))
+    }
+  </TableBody>
+</Table>

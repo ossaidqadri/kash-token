@@ -1,17 +1,16 @@
 ---
+import { getEntry, render } from "astro:content"
+
+import HomeHero from "@/components/sites/kashtoken/home-hero.astro"
+import Prose from "@/components/sites/kashtoken/prose.astro"
 import Layout from "@/layouts/main.astro"
-import { Button } from "@/components/ui/button"
+
+const page = await getEntry("pages", "home")
+if (!page) throw new Error("missing `home` page entry")
+const { Content } = await render(page)
 ---
 
-<Layout>
-  <div class="flex min-h-svh p-6">
-    <div class="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-      <div>
-        <h1 class="font-medium">Project ready!</h1>
-        <p>You may now add components and start building.</p>
-        <p>We've already added the button component for you.</p>
-        <Button client:load className="mt-2">Button</Button>
-      </div>
-    </div>
-  </div>
+<Layout description={page.data.description}>
+  <HomeHero slot="hero" />
+  <Prose><Content /></Prose>
 </Layout>

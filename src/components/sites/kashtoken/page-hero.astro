@@ -1,0 +1,28 @@
+---
+import { Picture } from "astro:assets"
+
+import heroBg from "@/assets/kashtoken/hero-bg.png"
+
+interface Props {
+  heading: string
+}
+
+const { heading } = Astro.props
+---
+
+<section class="relative h-[340px] overflow-hidden bg-brand-navy">
+  <Picture
+    src={heroBg}
+    alt=""
+    formats={["avif", "webp"]}
+    widths={[640, 1024]}
+    sizes="100vw"
+    loading="eager"
+    class="absolute inset-0 size-full object-cover"
+  />
+  <div class="relative mx-auto flex h-full max-w-[1154px] items-center justify-center px-2 pt-14">
+    <h1 class="text-center font-display text-[clamp(2.5rem,10vw,4.833rem)] leading-[1.06] font-bold text-white">
+      {heading}
+    </h1>
+  </div>
+</section>

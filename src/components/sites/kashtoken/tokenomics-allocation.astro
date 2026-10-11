@@ -1,0 +1,39 @@
+---
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { allocations, formatTokens, totalSupply } from "@/data/tokenomics"
+---
+
+<Card className="dark mx-auto w-full max-w-3xl font-inter">
+  <CardHeader>
+    <CardTitle className="text-cyan-300">KASH Tokenomics</CardTitle>
+    <CardDescription>{totalSupply.toLocaleString("en-US")} Fixed Supply • Binance Smart Chain (BEP‑20)</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Category</TableHead>
+          <TableHead>Allocation</TableHead>
+          <TableHead>Percentage</TableHead>
+          <TableHead>Purpose</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {
+          allocations.map((a) => (
+            <TableRow>
+              <TableCell>
+                <Badge className={a.badge}>{a.category}</Badge>
+              </TableCell>
+              <TableCell>{formatTokens(a.tokens)}</TableCell>
+              <TableCell>{a.percent}%</TableCell>
+              <TableCell className="whitespace-normal">{a.purpose}</TableCell>
+            </TableRow>
+          ))
+        }
+      </TableBody>
+    </Table>
+  </CardContent>
+</Card>

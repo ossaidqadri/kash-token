@@ -1,0 +1,16 @@
+---
+import { ShieldCheckIcon } from "lucide-react"
+
+import { buttonVariants } from "@/components/ui/button"
+import { site } from "@/data/site"
+---
+
+<a
+  href={`https://skynet.certik.com/tools/token-scan/bsc/${site.contract}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={buttonVariants({ variant: "ghost", size: "lg", className: "font-bold text-black hover:text-orange-500 hover:underline" })}
+>
+  <ShieldCheckIcon className="size-6 fill-orange-500 text-white" />
+  Scanned by CertiK Skynet
+</a>

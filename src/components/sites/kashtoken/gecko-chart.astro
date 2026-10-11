@@ -1,0 +1,11 @@
+---
+import { site } from "@/data/site"
+---
+
+<iframe
+  title="KASH live chart"
+  src={`https://www.geckoterminal.com/bsc/pools/${site.contract}?embed=1&info=0&swaps=1`}
+  class="h-[600px] w-full rounded-xl border"
+  loading="lazy"
+  allow="clipboard-write"
+  allowfullscreen></iframe>

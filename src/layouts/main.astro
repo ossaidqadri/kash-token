@@ -1,15 +1,52 @@
 ---
 import "@/styles/global.css"
+
+import { getImage } from "astro:assets"
+import { SEO } from "astro-seo"
+
+import logo from "@/assets/kashtoken/logo.png"
+import SiteFooter from "@/components/sites/kashtoken/site-footer.astro"
+import SiteHeader from "@/components/sites/kashtoken/site-header.astro"
+import { site } from "@/data/site"
+import { getNavTree } from "@/lib/nav"
+
+interface Props {
+  title?: string
+  description?: string | undefined
+}
+
+const { title, description = site.description } = Astro.props
+const fullTitle = title ? `${site.name} - ${title}` : site.name
+const [icon, share] = await Promise.all([
+  getImage({ src: logo, width: 64, height: 64, format: "png" }),
+  getImage({ src: logo, width: 400, height: 400, format: "png" }),
+])
+const tree = await getNavTree()
 ---
 
-<html lang="en">
+<!doctype html>
+<html lang="en-US">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Astro App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href={icon.src} />
+    <SEO
+      title={fullTitle}
+      description={description}
+      canonical={Astro.url}
+      openGraph={{
+        basic: { title: fullTitle, type: "website", image: new URL(share.src, Astro.site).href, url: Astro.url },
+        optional: { description, siteName: site.name },
+      }}
+      twitter={{ card: "summary" }}
+    />
   </head>
-  <body>
-    <slot />
+  <body class="flex min-h-svh flex-col bg-white font-sans text-ink">
+    <SiteHeader tree={tree} />
+    <slot name="hero" />
+    <main class="mx-auto w-full max-w-[1154px] flex-1 px-2 pt-8">
+      <slot />
+    </main>
+    <SiteFooter />
   </body>
 </html>

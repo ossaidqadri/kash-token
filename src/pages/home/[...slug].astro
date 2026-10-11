@@ -1,0 +1,20 @@
+---
+import { getCollection, render } from "astro:content"
+
+import PageHero from "@/components/sites/kashtoken/page-hero.astro"
+import Prose from "@/components/sites/kashtoken/prose.astro"
+import Layout from "@/layouts/main.astro"
+
+export async function getStaticPaths() {
+  const pages = await getCollection("pages")
+  return pages.filter(({ id }) => id !== "home").map((page) => ({ params: { slug: page.id }, props: { page } }))
+}
+
+const { page } = Astro.props
+const { Content } = await render(page)
+---
+
+<Layout title={page.data.title} description={page.data.description}>
+  <PageHero slot="hero" heading={page.data.heading ?? page.data.title} />
+  <Prose><Content /></Prose>
+</Layout>

@@ -1,0 +1,25 @@
+---
+import { Card, CardContent } from "@/components/ui/card"
+import { site } from "@/data/site"
+---
+
+<Card className="dark bg-[#0a1f44] text-center">
+  <CardContent>
+    <a
+      href={`https://solidityscan.com/quickscan/${site.contract}/bscscan/mainnet`}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group inline-flex flex-col items-center gap-3 no-underline"
+    >
+      <img
+        src="https://web-assets.solidityscan.com/web-assets/solidity_scan_assets/images/logo/solidityscan_white.webp"
+        alt="SolidityScan Logo"
+        class="h-10"
+        loading="lazy"
+      />
+      <span class="font-bold text-white group-hover:text-cyan-400 group-hover:underline">
+        Scanned using SolidityScan — View Our Security Report
+      </span>
+    </a>
+  </CardContent>
+</Card>
