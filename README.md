@@ -1,36 +1,46 @@
-# Astro + React + TypeScript + shadcn/ui
+# kash-token
 
-This is a template for a new Astro project with React, TypeScript, and shadcn/ui.
+Rebuild of https://www.kashtoken.com/, the site for KASH, a BEP-20 utility token on Binance Smart Chain. The original source was lost, so this is rebuilt from the live site.
 
-## Adding components
+Everything lives in `astro-app/`. The repo root holds only this README.
 
-To add components to your app, run the following command:
+## Stack
 
-```bash
-npx shadcn@latest add button
+Astro 7 (static output) with React islands, Tailwind CSS v4, shadcn/ui (Base UI), MDX content collection, TanStack Query and zod for the live price widgets, Recharts via the shadcn chart. Bun only, never npm, pnpm or yarn.
+
+## Content
+
+- 22 pages are MDX files in `astro-app/src/content/pages/`.
+- `src/pages/index.astro` serves the home page, `src/pages/home/[...slug].astro` the rest. The nav is built from the collection.
+- Reusable pieces live in `astro-app/src/components/sites/kashtoken/`.
+- `src/components/ui/` is shadcn generated. Don't put our own components there.
+
+## Commands (run from `astro-app/`)
+
+```
+bun install
+bun run dev
+bun run typecheck
+bun run check:astro
+bun run lint
+bun test src/lib
+bun run build
+bun run deploy
 ```
 
-This will place the ui components in the `src/components` directory.
+TypeScript uses the strictest Astro preset. ESLint is type-aware and strict, zero warnings. Typecheck and lint are cached.
 
-## Using components
+## Deploy
 
-To use the components in your app, import them in an `.astro` file:
+Cloudflare Workers static assets, no adapter. Config is `astro-app/wrangler.jsonc` (assets from `./dist`, 404 page). Manual deploy: `bun run build`, then `bunx wrangler deploy`.
 
-```astro
----
-import { Button } from "@/components/ui/button"
----
+Cloudflare Workers Builds settings:
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro App</title>
-  </head>
-  <body>
-    <div class="grid h-screen place-items-center content-center">
-      <Button>Button</Button>
-    </div>
-  </body>
-</html>
-```
+- Root directory: `astro-app`
+- Build command: `bun run build`
+- Deploy command: `bunx wrangler deploy`
+- Build variable `BUN_VERSION` = `1.4.0` (the lockfile needs bun 1.4+)
+
+## SEO
+
+Sitemap at /sitemap-index.xml, robots.txt, per-page descriptions in MDX frontmatter, JSON-LD in the layout.
