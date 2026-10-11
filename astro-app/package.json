@@ -14,7 +14,8 @@
     "lint": "eslint . --cache --cache-location node_modules/.cache/eslint/.eslintcache --cache-strategy content --max-warnings 0",
     "format": "prettier --write \"**/*.{ts,tsx,astro}\"",
     "typecheck": "tsc --noEmit",
-    "check:astro": "astro check"
+    "check:astro": "astro check",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.3",
@@ -64,6 +65,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "wrangler": "^4.149.0"
   }
 }

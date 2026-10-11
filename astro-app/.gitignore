@@ -23,3 +23,6 @@ pnpm-debug.log*
 
 # local research and screenshots, not part of the codebase
 docs/
+
+# wrangler local state
+.wrangler/
