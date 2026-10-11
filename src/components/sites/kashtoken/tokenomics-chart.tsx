@@ -19,7 +19,7 @@ const data = allocations.map((a) => ({ key: a.key, tokens: a.tokens, fill: `var(
 
 export default function TokenomicsChart() {
   return (
-    <Card className="dark mx-auto w-full max-w-3xl font-inter">
+    <Card className="dark not-prose mx-auto my-6 w-full max-w-3xl font-inter">
       <CardHeader>
         <CardTitle className="text-cyan-300">KASH Tokenomics</CardTitle>
         <CardDescription>{totalSupply.toLocaleString("en-US")} Fixed Supply • Binance Smart Chain</CardDescription>

@@ -33,7 +33,7 @@ export default function TicTacToe() {
   }, [mascotTurn])
 
   return (
-    <Card className="dark mx-auto w-full max-w-sm bg-linear-to-b from-[#0d1b2a] to-[#1b263b] text-center">
+    <Card className="dark not-prose mx-auto my-6 w-full max-w-sm bg-linear-to-b from-[#0d1b2a] to-[#1b263b] text-center">
       <CardHeader>
         <CardTitle className="text-2xl uppercase">KASH Tic Tac Toe</CardTitle>
       </CardHeader>
@@ -42,7 +42,7 @@ export default function TicTacToe() {
           <Button
             key={i}
             variant="secondary"
-            className="aspect-square h-auto text-3xl font-bold"
+            className="aspect-square h-auto bg-white text-3xl font-bold text-[#0d1b2a] hover:bg-white/80 disabled:opacity-100"
             disabled={over || mascotTurn || mark !== null}
             aria-label={`Cell ${String(i + 1)}${mark ? `, ${mark}` : ""}`}
             onClick={() => {

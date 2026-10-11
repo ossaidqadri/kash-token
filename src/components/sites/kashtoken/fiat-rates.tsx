@@ -35,7 +35,7 @@ function Calculator() {
     : `${Math.round(amount / target.rate / price).toLocaleString()} $KASH`
 
   return (
-    <Card className="dark mx-auto w-full max-w-md font-inter">
+    <Card className="dark not-prose mx-auto my-6 w-full max-w-md font-inter">
       <CardHeader className="flex items-center justify-between border-b">
         <div className="flex items-center gap-3">
           <Avatar>
@@ -77,6 +77,7 @@ function Calculator() {
               }}
             />
             <NativeSelect
+              className="w-28 shrink-0"
               value={index}
               aria-label="Currency"
               onChange={(e) => {

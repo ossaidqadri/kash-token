@@ -44,7 +44,7 @@ function Prices() {
         : "Loading prices…"
 
   return (
-    <Card className="dark mx-auto w-full max-w-3xl font-inter">
+    <Card className="dark not-prose mx-auto my-6 w-full max-w-3xl font-inter">
       <CardHeader className="flex items-center justify-between">
         <div>
           <CardTitle>Live Prices — Major Cryptos + KASH</CardTitle>
