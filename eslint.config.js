@@ -6,20 +6,30 @@ import tseslint from "typescript-eslint"
 import { defineConfig, globalIgnores } from "eslint/config"
 
 export default defineConfig([
-  globalIgnores(["dist", ".astro"]),
+  globalIgnores(["dist", ".astro", "node_modules", "**/.*"]),
   {
     files: ["**/*.{ts,tsx}"],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
     languageOptions: {
       globals: globals.browser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     rules: {
       "react-refresh/only-export-components": "off",
+      "@typescript-eslint/consistent-type-imports": "error",
+      "@typescript-eslint/no-unnecessary-condition": "error",
+      "@typescript-eslint/switch-exhaustiveness-check": "error",
+      eqeqeq: ["error", "always"],
+      "no-console": ["error", { allow: ["warn", "error"] }],
     },
   },
 ])
