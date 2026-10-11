@@ -5,22 +5,25 @@ import { getImage } from "astro:assets"
 import { SEO } from "astro-seo"
 
 import logo from "@/assets/kashtoken/logo.png"
+import JsonLd from "@/components/sites/kashtoken/json-ld.astro"
 import SiteFooter from "@/components/sites/kashtoken/site-footer.astro"
 import SiteHeader from "@/components/sites/kashtoken/site-header.astro"
 import { site } from "@/data/site"
 import { getNavTree } from "@/lib/nav"
 
 interface Props {
-  title?: string
+  title?: string | undefined
   description?: string | undefined
+  noindex?: boolean
 }
 
-const { title, description = site.description } = Astro.props
+const { title, description = site.description, noindex = false } = Astro.props
 const fullTitle = title ? `${site.name} - ${title}` : site.name
 const [icon, share] = await Promise.all([
   getImage({ src: logo, width: 64, height: 64, format: "png" }),
   getImage({ src: logo, width: 400, height: 400, format: "png" }),
 ])
+const shareUrl = new URL(share.src, Astro.site).href
 const tree = await getNavTree()
 ---
 
@@ -34,12 +37,30 @@ const tree = await getNavTree()
       title={fullTitle}
       description={description}
       canonical={Astro.url}
+      noindex={noindex}
+      nofollow={noindex}
       openGraph={{
-        basic: { title: fullTitle, type: "website", image: new URL(share.src, Astro.site).href, url: Astro.url },
-        optional: { description, siteName: site.name },
+        basic: { title: fullTitle, type: "website", image: shareUrl, url: Astro.url },
+        optional: { description, siteName: site.name, locale: "en_US" },
+        image: { alt: "KASH token logo", width: 400, height: 400 },
       }}
-      twitter={{ card: "summary" }}
+      twitter={{ card: "summary", site: "@theKASHtoken", title: fullTitle, description, image: shareUrl, imageAlt: "KASH token logo" }}
+      extend={{
+        link: [{ rel: "sitemap", type: "application/xml", href: "/sitemap-index.xml" }],
+        meta: [{ name: "theme-color", content: "#000a1f" }],
+      }}
     />
+    <JsonLd
+      data={{
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: "KASH Token",
+        url: site.url,
+        logo: shareUrl,
+        sameAs: site.socials.map(({ href }) => href),
+      }}
+    />
+    <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: site.url, description: site.description }} />
   </head>
   <body class="flex min-h-svh flex-col bg-white font-sans text-ink">
     <SiteHeader tree={tree} />
